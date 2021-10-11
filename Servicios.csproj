@@ -79,6 +79,9 @@
       <DependentUpon>Servicios.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="system\DataJson.cs" />
+    <Compile Include="system\DatosEnlace.cs" />
+    <Compile Include="system\EnlaceSqlServer.cs" />
     <Compile Include="system\Equipos.cs" />
     <Compile Include="system\Funciones.cs" />
   </ItemGroup>

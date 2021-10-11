@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <_PublishTargetUrl>C:\inetpub\wwwroot\Servicios</_PublishTargetUrl>
-    <History>True|2021-10-09T13:41:18.8166482Z;True|2021-10-07T16:41:51.2832392-05:00;True|2021-10-07T15:33:10.5425825-05:00;True|2021-10-07T15:30:53.9191333-05:00;True|2021-10-07T14:48:32.7301144-05:00;True|2021-10-07T14:14:27.6101171-05:00;True|2021-10-07T14:09:13.7980244-05:00;False|2021-10-07T14:07:50.5429681-05:00;False|2021-10-07T13:59:46.1498970-05:00;False|2021-10-07T12:18:29.3131850-05:00;False|2021-10-07T12:17:16.7191949-05:00;False|2021-10-07T12:06:00.4358387-05:00;False|2021-10-07T12:04:30.5579984-05:00;False|2021-10-07T11:55:29.1328428-05:00;</History>
+    <History>True|2021-10-11T19:54:29.3310583Z;True|2021-10-11T13:55:29.4407531-05:00;True|2021-10-11T13:51:28.7128681-05:00;True|2021-10-11T13:45:51.1004212-05:00;True|2021-10-11T13:43:31.0554566-05:00;True|2021-10-11T13:37:47.5283249-05:00;True|2021-10-11T11:45:22.3470367-05:00;True|2021-10-11T09:27:41.3723245-05:00;True|2021-10-09T08:41:18.8166482-05:00;True|2021-10-07T16:41:51.2832392-05:00;True|2021-10-07T15:33:10.5425825-05:00;True|2021-10-07T15:30:53.9191333-05:00;True|2021-10-07T14:48:32.7301144-05:00;True|2021-10-07T14:14:27.6101171-05:00;True|2021-10-07T14:09:13.7980244-05:00;False|2021-10-07T14:07:50.5429681-05:00;False|2021-10-07T13:59:46.1498970-05:00;False|2021-10-07T12:18:29.3131850-05:00;False|2021-10-07T12:17:16.7191949-05:00;False|2021-10-07T12:06:00.4358387-05:00;False|2021-10-07T12:04:30.5579984-05:00;False|2021-10-07T11:55:29.1328428-05:00;</History>
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
@@ -162,16 +162,16 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>08/08/2018 12:18:16</publishTime>
     </File>
     <File Include="bin/Servicios.dll">
-      <publishTime>10/09/2021 15:26:18</publishTime>
+      <publishTime>11/10/2021 13:55:27</publishTime>
     </File>
     <File Include="bin/Servicios.pdb">
-      <publishTime>10/09/2021 15:26:18</publishTime>
+      <publishTime>11/10/2021 13:55:27</publishTime>
     </File>
     <File Include="Servicios.asmx">
       <publishTime>10/07/2021 11:05:58</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>07/10/2021 14:14:24</publishTime>
+      <publishTime>10/11/2021 14:54:29</publishTime>
     </File>
   </ItemGroup>
 </Project>

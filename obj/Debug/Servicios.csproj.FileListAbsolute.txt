@@ -58,4 +58,3 @@ D:\Csharp\Servicios\obj\Debug\Servicios.dll
 D:\Csharp\Servicios\obj\Debug\Servicios.pdb
 D:\Csharp\Servicios\bin\Newtonsoft.Json.dll
 D:\Csharp\Servicios\bin\Newtonsoft.Json.xml
-D:\Csharp\Servicios\obj\Debug\Servicios.csproj.CopyComplete

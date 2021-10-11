@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Services;
@@ -128,7 +130,7 @@ namespace Servicios
             equipo2.Add("Nombre", "Valencia");
             equipo2.Add("Pais", "España");
 
-            equipos.Add(equipo2);
+            equipos.Add(equipo2); 
 
             json.Add("equipos", equipos);
 
@@ -139,7 +141,60 @@ namespace Servicios
         [WebMethod]
         public string GuardarJson(string json)
         {
+            var dataJson = JsonConvert.DeserializeObject<DataJson>(json);
+            Funciones.Logs("JSON", $"Deporte: {dataJson.Deporte}; Equipos: ");
+
+            foreach (var equipo in dataJson.equipos)
+            {
+                Funciones.Logs("JSON", $"{equipo.Nombre} - {equipo.Pais}");
+
+            }
+
             return "Proceso realizado con éxito";
+        }
+
+        [WebMethod]
+        public string ObtenerProductos()
+        {
+            List<Dictionary<string, string>> json = new List<Dictionary<string, string>>();
+
+            if (!EnlaceSqlServer.ConectarSqlServer())
+            {
+                return "";
+            }
+
+            try
+            {
+                using (var com = new SqlCommand("SELECT * FROM Productos", EnlaceSqlServer.Conexion))
+                {
+                    com.CommandType = CommandType.Text;
+                    com.CommandTimeout = DatosEnlace.TimeOutSqlServer;
+
+                    using (SqlDataReader record = com.ExecuteReader())
+                    {
+                        if (record.HasRows)
+                        {
+                            Dictionary<string, string> row;
+                            while (record.Read())
+                            {
+                                row = new Dictionary<string, string>();
+                                for (int f = 0; f < record.FieldCount; f++)
+                                {
+                                    row.Add(record.GetName(f), record.GetValue(f).ToString());
+                                }
+                                json.Add(row);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Funciones.Logs("ObtenerProductos", e.Message);
+                Funciones.Logs("ObtenerProductos_DEBUG", e.StackTrace);
+            }
+
+            return JsonConvert.SerializeObject(json);
         }
 
     }
