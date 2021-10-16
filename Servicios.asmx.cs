@@ -197,5 +197,122 @@ namespace Servicios
             return JsonConvert.SerializeObject(json);
         }
 
+        [WebMethod]
+        public Producto ObtenerProducto(int id)
+        {
+            var producto = new Producto();
+            producto.IdProducto = 0;
+            producto.Nombre = "";
+            producto.Precio = 0;
+            producto.Stock = 0;
+
+            if (!EnlaceSqlServer.ConectarSqlServer())
+            {
+                return producto;
+            }
+
+            try
+            {
+                using (var com = new SqlCommand($"SELECT TOP 1 * FROM Productos WHERE IdProducto = {id}", EnlaceSqlServer.Conexion))
+                {
+                    com.CommandType = CommandType.Text;
+                    com.CommandTimeout = DatosEnlace.TimeOutSqlServer;
+
+                    using (SqlDataReader record = com.ExecuteReader())
+                    {
+                        if (record.HasRows && record.Read())
+                        {
+                            producto.IdProducto = Convert.ToInt32(record.GetValue(0).ToString());
+                            producto.Nombre = record.GetValue(1).ToString();
+                            producto.Precio = Convert.ToDouble(record.GetValue(2));
+                            producto.Stock = Convert.ToInt32(record.GetValue(3));
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Funciones.Logs("ObtenerProducto", e.Message);
+                Funciones.Logs("ObtenerProducto_DEBUG", e.StackTrace);
+            }
+
+            return producto;
+        }
+
+        [WebMethod]
+        public string AcualizarProducto(Producto producto)
+        {
+            string result = "";
+
+            if (!EnlaceSqlServer.ConectarSqlServer())
+            {
+                return "";
+            }
+
+            try
+            {
+                using (SqlCommand com = new SqlCommand("UPDATE Productos SET" +
+                    " Nombre = @Nombre, Precio = @Precio, Stock = @Stock WHERE IdProducto = @IdProducto", EnlaceSqlServer.Conexion))
+                {
+                    com.Parameters.AddWithValue("@Nombre", producto.Nombre);
+                    com.Parameters.AddWithValue("@Precio", producto.Precio);
+                    com.Parameters.AddWithValue("@Stock", producto.Stock);
+                    com.Parameters.AddWithValue("@IdProducto", producto.IdProducto);
+
+                    int cant = com.ExecuteNonQuery();
+
+                    if (cant == 1)
+                    {
+                        result = "Producto actualizado con éxito";
+                    }
+                    else
+                    {
+                        result = "Error al actualizar el producto";
+                    }
+                }
+
+            }
+            catch (Exception e)
+            {
+                Funciones.Logs("AcualizarProducto", e.Message);
+                Funciones.Logs("AcualizarProducto_DEBUG", e.StackTrace);
+            }
+
+            return result;
+        }
+
+        [WebMethod]
+        public int GuardarProducto(Producto producto)
+        {
+            int idProducto = 0;
+
+            if (!EnlaceSqlServer.ConectarSqlServer())
+            {
+                return 0;
+            }
+
+            try
+            {
+                using (var cmd = new SqlCommand("INSERT INTO Productos (Nombre, Precio, Stock) VALUES(@Nombre, @Precio, @Stock);"+ 
+                    " SELECT CAST(scope_identity() AS int)", EnlaceSqlServer.Conexion))
+                {
+                    cmd.Parameters.AddWithValue("@Nombre", producto.Nombre);
+                    cmd.Parameters.AddWithValue("@Precio", producto.Precio);
+                    cmd.Parameters.AddWithValue("@Stock", producto.Stock);
+
+                    idProducto = (int)cmd.ExecuteScalar();
+                }
+            }
+            catch (Exception e)
+            {
+                Funciones.Logs("GuardarProducto", e.Message);
+                Funciones.Logs("GuardarProducto_DEBUG", e.StackTrace);
+            }
+
+
+
+            return idProducto;
+        }
+
     }
 }

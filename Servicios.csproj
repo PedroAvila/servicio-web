@@ -84,6 +84,7 @@
     <Compile Include="system\EnlaceSqlServer.cs" />
     <Compile Include="system\Equipos.cs" />
     <Compile Include="system\Funciones.cs" />
+    <Compile Include="system\Producto.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
